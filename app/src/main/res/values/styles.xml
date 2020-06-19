@@ -1,0 +1,61 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="TextViewStyleBlueBold26sp" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/text_dim_26sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="AppTheme_NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionModeOverlay">@null</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="MyHintStyle" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:colorAccent">@color/colorWhite</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/dim_16dp</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="MyEditText" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="colorControlNormal">@color/colorWhite</item>
+        <item name="colorControlActivated">@color/colorWhite</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/dim_18dp</item>
+        <item name="android:paddingTop">@dimen/dim_8dp</item>
+        <item name="android:paddingBottom">@dimen/dim_16dp</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="TextViewStyleBlueBold16sp" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">@dimen/text_dim_16sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+
+    <style name="TextViewStyleWhiteBold16sp" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/text_dim_16sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <dimen name="text_dim_26sp">26sp</dimen>
+    <dimen name="dim_18dp">18dp</dimen>
+    <dimen name="dim_8dp">18dp</dimen>
+    <dimen name="text_dim_16sp">16sp</dimen>
+</resources>
