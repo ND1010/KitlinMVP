@@ -7,6 +7,7 @@ import io.reactivex.Flowable
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
+import java.util.HashMap
 
 interface RestApi {
 
@@ -50,4 +51,14 @@ interface RestApi {
     fun createTask(@PartMap params: HashMap<String, RequestBody>, @Part body: MultipartBody.Part): Flowable<CreateTaskResponse>*/
 
 
+    /*@POST(Constants.ApiMethod.API_AGNET_KYC)
+    @Multipart
+    fun doApiForAgentKyc(
+        @PartMap
+        params: HashMap<String, RequestBody>,
+        @Part
+        bodyPanImage: MultipartBody.Part,
+        @Part
+        bodyAadhaarImage: MultipartBody.Part
+    ): Flowable<AgentKycResponse>*/
 }
