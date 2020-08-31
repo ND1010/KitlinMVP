@@ -5,11 +5,13 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.provider.Settings
+import androidx.room.Room
 import com.app.bhaskar.easypaisa.di.components.AppComponent
 import com.app.bhaskar.easypaisa.di.components.DaggerAppComponent
 import com.app.bhaskar.easypaisa.response_model.LoginResponse
 import com.app.bhaskar.easypaisa.response_model.UserRequiredDataResponse
 import com.app.bhaskar.easypaisa.utils.Constants
+import com.app.dhruv.kotlinmvp.AppDatabase
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.pa.di.modules.DatabaseModule
@@ -23,6 +25,8 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+val DB_FILE_NAME = "myapp.db"
+
 class MyApp : Application() {
 
     companion object {
@@ -31,9 +35,11 @@ class MyApp : Application() {
         private var mGsonSimple: Gson? = null
         private var mDeviceId: String? = null
         private var mInstance: MyApp? = null
+
         //Instance of OkHttpclient
         private var client: OkHttpClient? = null
         private var eventBus: EventBus? = null
+
         //Instance of Retrofit
         var mRetrofit: Retrofit? = null
 
@@ -49,6 +55,11 @@ class MyApp : Application() {
             }
             mGson = GsonBuilder().setLenient().create()
             return mGson!!
+        }
+
+        fun getDB(): AppDatabase {
+            return Room.databaseBuilder(getAppInstance(), AppDatabase::class.java, DB_FILE_NAME)
+                .build()
         }
 
         fun getDefault(): EventBus {
@@ -203,5 +214,6 @@ class MyApp : Application() {
                 .postRepoModule(PostRepoModule())
                 .build()
     }
+
 
 }

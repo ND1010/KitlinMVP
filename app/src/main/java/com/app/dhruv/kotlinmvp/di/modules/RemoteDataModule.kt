@@ -24,7 +24,6 @@ class RemoteDataModule(val baseUrl: String) {
     fun provideRetrofit(): Retrofit {
         val gson = GsonBuilder().create()
 
-
         return Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -32,6 +31,5 @@ class RemoteDataModule(val baseUrl: String) {
                 .client(MyApp.getClient())
                 .build()
     }
-
 
 }

@@ -1,9 +1,10 @@
 package com.app.bhaskar.easypaisa.mvp.presenter
 
-import android.content.Intent
 import com.app.bhaskar.easypaisa.application.MyApp
 import com.app.bhaskar.easypaisa.repositories.EasyPaisaRepository
+import com.app.bhaskar.easypaisa.restapi.RestApi
 import com.app.bhaskar.easypaisa.utils.Utils
+import com.app.dhruv.kotlinmvp.AppDatabase
 import com.app.dhruv.kotlinmvp.R
 import javax.inject.Inject
 
@@ -12,6 +13,8 @@ class LoginPresenterImpl(val view: LoginPresenter.LoginView) : LoginPresenter {
     private val mEventBus = MyApp.getDefault()
     @Inject
     lateinit var repository: EasyPaisaRepository
+
+
 
     /*override fun forgotPassword(forgotPasswordRequest: ForgotPasswordRequest) {
 
@@ -63,7 +66,7 @@ class LoginPresenterImpl(val view: LoginPresenter.LoginView) : LoginPresenter {
         if (Utils.isNetworkConnected(view.getViewActivity())) {
             view.showProgress()
             val request = view.doRetriveModel().getLoginRequest()
-            repository.apiLoginToApp(request, {
+            /*repository.apiLoginToApp(request, {
                 view.hideProgress()
                 view.doRetriveModel().getLoginDomain().loginResponse= it!!
                 view.onLoginResponse()
@@ -72,7 +75,7 @@ class LoginPresenterImpl(val view: LoginPresenter.LoginView) : LoginPresenter {
                 if (it?.message != null) {
                     view.showError(it.message!!)
                 }
-            })
+            })*/
         }else{
             view.showError(view.getViewActivity().getString(R.string.no_internet_message))
         }
@@ -95,6 +98,16 @@ class LoginPresenterImpl(val view: LoginPresenter.LoginView) : LoginPresenter {
         }else{
             view.showError(view.getViewActivity().getString(R.string.no_internet_message))
         }
+    }
+
+    override fun insertData() {
+        repository.dbInsertShow("dhruv",{
+            view.onInsetData(it)
+        }, {
+            if (it?.message != null) {
+                view.showError(it.message!!)
+            }
+        })
     }
 
     override fun onError(message: String) {

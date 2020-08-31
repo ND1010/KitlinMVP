@@ -49,7 +49,10 @@ class LoginActivity : BaseActivity(), LoginPresenter.LoginView {
                     textInputLayoutLoginPassword.editText!!.text.toString()
                 presenter.doLogin()
             }
+        }
 
+        tvLabelLoginNow.setOnClickListener {
+            presenter.insertData()
         }
 
         tvForgotPassword.setOnClickListener {
@@ -157,5 +160,9 @@ class LoginActivity : BaseActivity(), LoginPresenter.LoginView {
         } else {
             showError(loginResponse.message)
         }
+    }
+
+    override fun onInsetData(it: String) {
+        showToast("Insert done")
     }
 }

@@ -25,7 +25,6 @@ interface RestApi {
 
     @POST(Constants.ApiMethod.API_USER_REQ_DATA)
     fun doApiForUserRequiredData(@Body request: RequestBody): Flowable<UserRequiredDataResponse>
-
     /*@GET(Constants.SEARCH)
     @Headers(Constants.HEADER_CONTENT_TYPE)
     fun getTracks(@Query(Constants.PARAM_TERM) term: String): Flowable<Tracks>*/

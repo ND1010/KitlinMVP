@@ -34,4 +34,10 @@ interface EasyPaisaRepository {
         succressHandler: (UserRequiredDataResponse) -> Unit,
         failerHansler: (Throwable?) -> Unit
     )
+
+    fun dbInsertShow(
+        s: String,
+        successHandler: (String) -> Unit,
+        failerHansler: (Throwable?) -> Unit
+    )
 }

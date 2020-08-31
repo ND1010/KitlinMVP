@@ -3,23 +3,23 @@ package com.app.bhaskar.easypaisa.repositories
 
 import android.annotation.SuppressLint
 import com.app.bhaskar.easypaisa.application.MyApp
+import com.app.bhaskar.easypaisa.application.MyApp.Companion.getDB
 import com.app.bhaskar.easypaisa.request_model.*
 import com.app.bhaskar.easypaisa.response_model.*
 import com.app.bhaskar.easypaisa.restapi.RestApi
 import com.app.bhaskar.easypaisa.utils.Utils
-import com.pa.models.dao.ResultDataDao
+import com.app.dhruv.kotlinmvp.AppDatabase
+import com.app.dhruv.kotlinmvp.model.TvShowsEntity
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
 import io.reactivex.schedulers.Schedulers.newThread
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
-import java.io.File
 
 
-class RepositoryImpl(val localSource: ResultDataDao, val mRestApi: RestApi) : EasyPaisaRepository {
+class RepositoryImpl(var localSource: AppDatabase, val mRestApi: RestApi) : EasyPaisaRepository {
+
+    init {
+        localSource = getDB()
+    }
 
 
     @SuppressLint("CheckResult")
@@ -28,6 +28,7 @@ class RepositoryImpl(val localSource: ResultDataDao, val mRestApi: RestApi) : Ea
         successHandler: (LoginResponse?) -> Unit,
         failerHandler: (Throwable?) -> Unit
     ) {
+
         val request: Flowable<LoginResponse> =
             mRestApi.doApiForLogin(Utils.getRequest(MyApp.getGsonWithExpose().toJson(request)))
         request
@@ -218,5 +219,28 @@ class RepositoryImpl(val localSource: ResultDataDao, val mRestApi: RestApi) : Ea
 //            )
 //    }
 
+
+    override fun dbInsertShow(
+        s: String,
+        successHandler: (String) -> Unit,
+        failerHansler: (Throwable?) -> Unit
+    ) {
+        val tvEntity = TvShowsEntity()
+        tvEntity.favrate = true
+//        tvEntity.show_id ="2"
+        tvEntity.show_name = "Mirsapur"
+        tvEntity.watched_episode_ids = "1"
+        tvEntity.watched_season_ids = "1"
+
+        localSource.metTVShowDao()
+            .insertShow(tvEntity)
+            .subscribeOn(newThread())
+            .observeOn(mainThread())
+            .subscribe({
+                successHandler("success")
+            }, {
+                failerHansler(it)
+            })
+    }
 
 }

@@ -10,10 +10,12 @@ interface LoginPresenter : BasePresenter {
         fun doRetriveModel(): LoginActivityModel
         fun onLoginResponse()
         fun onResrtToken()
+        fun onInsetData(it: String)
     }
     fun gotoRegistrationScreen()
     fun gotoForgotPassword()
     fun doLogin()
     fun gotoHomeScreen()
     fun doCallApiForSendPasswordToken()
+    fun insertData()
 }
